@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Hace que la página se adapte al tamaño del celular -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diana Calle | Estudiante de Contabilidad General</title>
+    <meta
+      name="description"
+      content="Página profesional de Diana Calle, estudiante de Contabilidad General en la UCB San Pablo (UAC)."
+    />
+    <meta name="theme-color" content="#047857" />
+
+    <style>
+      /* =====================================================
+       1. VARIABLES DE COLOR Y MEDIDAS (verde esmeralda)
+       Si quieres cambiar los colores, hazlo solo aquí.
+       ===================================================== */
+      :root {
+        --verde-oscuro: #064e3b;
+        --verde: #047857;
+        --verde-medio: #10b981;
+        --verde-claro: #d1fae5;
+        --verde-fondo: #ecfdf5;
+        --texto: #1f2937;
+        --texto-suave: #4b5563;
+        --blanco: #ffffff;
+        --borde: #e5e7eb;
+        --sombra: 0 10px 30px rgba(6, 78, 59, 0.12);
+        --radio: 16px;
+        --alto-menu: 68px;
+      }
+
+      /* =====================================================
+       2. ESTILOS GENERALES
+       ===================================================== */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: var(--alto-menu);
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          Roboto,
+          Arial,
+          sans-serif;
+        color: var(--texto);
+        background: var(--blanco);
+        line-height: 1.65;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+      }
+
+      .contenedor {
+        width: min(1100px, 92%);
+        margin-inline: auto;
+      }
+
+      section {
+        padding: 88px 0;
+      }
+      section:nth-of-type(even) {
+        background: var(--verde-fondo);
+      }
+
+      .titulo-seccion {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+      .titulo-seccion h2 {
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        color: var(--verde-oscuro);
+      }
+      .titulo-seccion span {
+        display: block;
+        width: 64px;
+        height: 4px;
+        background: var(--verde-medio);
+        border-radius: 4px;
+        margin: 12px auto 0;
+      }
+
+      /* Botones */
+      .btn {
+        display: inline-block;
+        padding: 13px 28px;
+        border-radius: 999px;
+        font-weight: 600;
+        border: 2px solid transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        font-family: inherit;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          background 0.2s,
+          color 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn-principal {
+        background: var(--verde);
+        color: var(--blanco);
+        box-shadow: var(--sombra);
+      }
+      .btn-principal:hover {
+        background: var(--verde-oscuro);
+      }
+      .btn-borde {
+        border-color: var(--verde);
+        color: var(--verde);
+        background: transparent;
+      }
+      .btn-borde:hover {
+        background: var(--verde);
+        color: var(--blanco);
+      }
+
+      /* =====================================================
+       3. MENÚ SUPERIOR (se convierte en hamburguesa en celular)
+       ===================================================== */
+      header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: var(--alto-menu);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+        z-index: 100;
+        transition: box-shadow 0.3s;
+      }
+      header.con-sombra {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .barra {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: var(--verde-oscuro);
+      }
+      .logo b {
+        color: var(--verde-medio);
+      }
+
+      nav ul {
+        display: flex;
+        gap: 6px;
+      }
+      nav a {
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-weight: 500;
+        color: var(--texto-suave);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      nav a:hover,
+      nav a.activo {
+        background: var(--verde-claro);
+        color: var(--verde-oscuro);
+      }
+
+      /* Botón de hamburguesa (oculto en computadora) */
+      .hamburguesa {
+        display: none;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        width: 44px;
+        height: 44px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .hamburguesa span {
+        width: 26px;
+        height: 3px;
+        background: var(--verde-oscuro);
+        border-radius: 3px;
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+      }
+      .hamburguesa.abierto span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      .hamburguesa.abierto span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburguesa.abierto span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+
+      /* =====================================================
+       4. INICIO
+       ===================================================== */
+      #inicio {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: calc(var(--alto-menu) + 30px);
+        background:
+          radial-gradient(
+            circle at 85% 15%,
+            var(--verde-claro) 0,
+            transparent 45%
+          ),
+          linear-gradient(180deg, var(--verde-fondo), var(--blanco));
+      }
+      .inicio-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .saludo {
+        color: var(--verde);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      #inicio h1 {
+        font-size: clamp(2.3rem, 6vw, 3.8rem);
+        color: var(--verde-oscuro);
+        line-height: 1.1;
+        margin: 8px 0 14px;
+      }
+      .rol {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--verde);
+        margin-bottom: 14px;
+      }
+      .frase {
+        color: var(--texto-suave);
+        font-size: 1.1rem;
+        max-width: 520px;
+        margin-bottom: 30px;
+      }
+      .acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .foto-marco {
+        width: min(340px, 80%);
+        aspect-ratio: 1;
+        margin-inline: auto;
+        border-radius: 50%;
+        padding: 8px;
+        background: linear-gradient(
+          135deg,
+          var(--verde-medio),
+          var(--verde-oscuro)
+        );
+        box-shadow: var(--sombra);
+      }
+      .foto-marco img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 6px solid var(--blanco);
+      }
+
+      /* =====================================================
+       5. SOBRE MÍ
+       ===================================================== */
+      .sobre-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .sobre-texto p {
+        margin-bottom: 16px;
+        color: var(--texto-suave);
+        font-size: 1.05rem;
+      }
+      .datos {
+        display: grid;
+        gap: 14px;
+      }
+      .dato {
+        background: var(--blanco);
+        border: 1px solid var(--borde);
+        border-left: 5px solid var(--verde-medio);
+        border-radius: 12px;
+        padding: 16px 20px;
+      }
+      .dato small {
+        display: block;
+        color: var(--texto-suave);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+      .dato strong {
+        color: var(--verde-oscuro);
+        font-size: 1.05rem;
+      }
+
+      /* =====================================================
+       6. EXPERIENCIA Y FORMACIÓN (línea de tiempo)
+       ===================================================== */
+      .linea {
+        position: relative;
+        max-width: 780px;
+        margin-inline: auto;
+        padding-left: 34px;
+      }
+      .linea::before {
+        content: "";
+        position: absolute;
+        left: 9px;
+        top: 6px;
+        bottom: 6px;
+        width: 3px;
+        background: var(--verde-claro);
+        border-radius: 3px;
+      }
+      .hito {
+        position: relative;
+        margin-bottom: 30px;
+      }
+      .hito::before {
+        content: "";
+        position: absolute;
+        left: -33px;
+        top: 22px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--verde-medio);
+        border: 3px solid var(--blanco);
+        box-shadow: 0 0 0 3px var(--verde-claro);
+      }
+      .tarjeta {
+        background: var(--blanco);
+        border: 1px solid var(--borde);
+        border-radius: var(--radio);
+        padding: 24px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      }
+      .etiqueta {
+        display: inline-block;
+        background: var(--verde-claro);
+        color: var(--verde-oscuro);
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 8px;
+      }
+      .tarjeta h3 {
+        color: var(--verde-oscuro);
+        font-size: 1.2rem;
+      }
+      .tarjeta .lugar {
+        color: var(--verde);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .tarjeta li {
+        position: relative;
+        padding-left: 22px;
+        margin: 6px 0;
+        color: var(--texto-suave);
+      }
+      .tarjeta li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--verde-medio);
+        font-weight: 800;
+      }
+      .subtitulo-linea {
+        max-width: 780px;
+        margin: 0 auto 22px;
+        color: var(--verde-oscuro);
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      /* =====================================================
+       7. HABILIDADES
+       ===================================================== */
+      .habilidades-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 22px;
+      }
+      .habilidad {
+        background: var(--blanco);
+        border: 1px solid var(--borde);
+        border-radius: var(--radio);
+        padding: 28px 22px;
+        text-align: center;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .habilidad:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--sombra);
+      }
+      .icono {
+        width: 62px;
+        height: 62px;
+        margin: 0 auto 14px;
+        display: grid;
+        place-items: center;
+        font-size: 1.8rem;
+        background: var(--verde-claro);
+        border-radius: 50%;
+      }
+      .habilidad h3 {
+        color: var(--verde-oscuro);
+        margin-bottom: 4px;
+      }
+      .habilidad p {
+        color: var(--texto-suave);
+        font-size: 0.95rem;
+      }
+
+      /* =====================================================
+       8. SERVICIOS
+       ===================================================== */
+      .servicios-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 22px;
+      }
+      .servicio {
+        background: var(--blanco);
+        border-radius: var(--radio);
+        padding: 28px 24px;
+        border-top: 5px solid var(--verde-medio);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .servicio:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--sombra);
+      }
+      .servicio .icono {
+        margin: 0 0 14px;
+      }
+      .servicio h3 {
+        color: var(--verde-oscuro);
+        margin-bottom: 8px;
+      }
+      .servicio p {
+        color: var(--texto-suave);
+      }
+
+      /* =====================================================
+       9. CONTACTO Y FORMULARIO
+       ===================================================== */
+      .contacto-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .info-contacto {
+        display: grid;
+        gap: 16px;
+      }
+      .info-item {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        background: var(--blanco);
+        border: 1px solid var(--borde);
+        border-radius: 14px;
+        padding: 16px 18px;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      a.info-item:hover {
+        border-color: var(--verde-medio);
+        transform: translateX(4px);
+      }
+      .info-item .icono {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        margin: 0;
+      }
+      .info-item small {
+        display: block;
+        color: var(--texto-suave);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .info-item strong {
+        color: var(--verde-oscuro);
+        word-break: break-word;
+      }
+
+      form {
+        background: var(--blanco);
+        border: 1px solid var(--borde);
+        border-radius: var(--radio);
+        padding: 28px;
+        box-shadow: var(--sombra);
+      }
+      .campo {
+        margin-bottom: 18px;
+      }
+      .campo label {
+        display: block;
+        font-weight: 600;
+        color: var(--verde-oscuro);
+        margin-bottom: 6px;
+      }
+      .campo input,
+      .campo textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border: 2px solid var(--borde);
+        border-radius: 10px;
+        font: inherit;
+        color: var(--texto);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .campo textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+      .campo input:focus,
+      .campo textarea:focus {
+        outline: none;
+        border-color: var(--verde-medio);
+        box-shadow: 0 0 0 4px var(--verde-claro);
+      }
+      .campo.error input,
+      .campo.error textarea {
+        border-color: #dc2626;
+      }
+      .mensaje-error {
+        display: none;
+        color: #dc2626;
+        font-size: 0.85rem;
+        margin-top: 5px;
+      }
+      .campo.error .mensaje-error {
+        display: block;
+      }
+
+      /* Campo trampa para robots: las personas no lo ven */
+      .trampa {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        height: 0;
+        width: 0;
+      }
+
+      form .btn {
+        width: 100%;
+      }
+      form .btn:disabled {
+        opacity: 0.6;
+        cursor: wait;
+        transform: none;
+      }
+
+      .resultado {
+        display: none;
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-align: center;
+      }
+      .resultado.ok {
+        display: block;
+        background: var(--verde-claro);
+        color: var(--verde-oscuro);
+      }
+      .resultado.fallo {
+        display: block;
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      /* =====================================================
+       10. PIE DE PÁGINA
+       ===================================================== */
+      footer {
+        background: var(--verde-oscuro);
+        color: #d1fae5;
+        text-align: center;
+        padding: 28px 0;
+        font-size: 0.95rem;
+      }
+
+      /* =====================================================
+       11. ANIMACIONES AL BAJAR (las activa el JavaScript)
+       ===================================================== */
+      .aparecer {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .aparecer.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* Si la persona prefiere menos movimiento, se quitan las animaciones */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .aparecer {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        * {
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* =====================================================
+       12. VERSIÓN PARA CELULAR Y TABLET
+       ===================================================== */
+      @media (max-width: 860px) {
+        section {
+          padding: 64px 0;
+        }
+
+        .hamburguesa {
+          display: flex;
+        }
+
+        /* El menú se vuelve un panel que baja desde arriba */
+        nav {
+          position: absolute;
+          top: var(--alto-menu);
+          left: 0;
+          right: 0;
+          background: var(--blanco);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.35s ease;
+        }
+        nav.abierto {
+          max-height: 420px;
+        }
+        nav ul {
+          flex-direction: column;
+          padding: 12px 4%;
+          gap: 2px;
+        }
+        nav a {
+          display: block;
+          padding: 14px;
+          border-radius: 10px;
+        }
+
+        .inicio-grid,
+        .sobre-grid,
+        .contacto-grid {
+          grid-template-columns: 1fr;
+        }
+        .inicio-grid {
+          text-align: center;
+        }
+        .frase {
+          margin-inline: auto;
+        }
+        .acciones {
+          justify-content: center;
+        }
+        .foto-marco {
+          order: -1;
+          width: min(240px, 70%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ========================= MENÚ ========================= -->
+    <header id="encabezado">
+      <div class="contenedor barra">
+        <a href="#inicio" class="logo">Diana <b>Calle</b></a>
+
+        <button
+          class="hamburguesa"
+          id="botonMenu"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav id="menu">
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ========================= INICIO ========================= -->
+      <section id="inicio">
+        <div class="contenedor inicio-grid">
+          <div class="aparecer">
+            <p class="saludo">¡Hola! Soy</p>
+            <h1>Diana Calle</h1>
+            <p class="rol">Estudiante de Contabilidad General</p>
+            <!-- Puedes cambiar esta frase por la que más te represente -->
+            <p class="frase">
+              Estudiante de Contabilidad con ganas de aprender, ordenar y
+              aportar en cada práctica que realizo.
+            </p>
+            <div class="acciones">
+              <a href="#contacto" class="btn btn-principal">Contáctame</a>
+              <a href="CV_Diana_Calle.docx" class="btn btn-borde" download
+                >Descargar mi CV</a
+              >
+            </div>
+          </div>
+
+          <div class="aparecer">
+            <div class="foto-marco">
+              <img src="foto.jpg" alt="Foto de Diana Calle" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= SOBRE MÍ ========================= -->
+      <section id="sobre-mi">
+        <div class="contenedor">
+          <div class="titulo-seccion aparecer">
+            <h2>Sobre mí</h2>
+            <span></span>
+          </div>
+
+          <div class="sobre-grid">
+            <div class="sobre-texto aparecer">
+              <p>
+                Soy estudiante de
+                <strong>cuarto semestre de Contabilidad General</strong> en la
+                Universidad Católica Boliviana San Pablo (UCB UAC).
+              </p>
+              <p>
+                Realicé prácticas institucionales en la
+                <strong>Pastoral Social Cáritas Corocoro</strong>, donde apoyé
+                en la gestión y seguimiento de proyectos, la organización de
+                documentación y el trabajo administrativo básico.
+              </p>
+              <p>
+                Cuento con conocimientos de contabilidad básica, Excel y manejo
+                de caja y documentación. Tengo disponibilidad de tiempo completo
+                por 3 meses.
+              </p>
+            </div>
+
+            <div class="datos aparecer">
+              <div class="dato">
+                <small>Carrera</small><strong>Contabilidad General</strong>
+              </div>
+              <div class="dato">
+                <small>Universidad</small><strong>UCB San Pablo (UAC)</strong>
+              </div>
+              <div class="dato">
+                <small>Semestre</small><strong>Cuarto semestre</strong>
+              </div>
+              <div class="dato">
+                <small>Disponibilidad</small
+                ><strong>Tiempo completo – 3 meses</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= EXPERIENCIA Y FORMACIÓN ========================= -->
+      <section id="experiencia">
+        <div class="contenedor">
+          <div class="titulo-seccion aparecer">
+            <h2>Experiencia y formación</h2>
+            <span></span>
+          </div>
+
+          <h3 class="subtitulo-linea aparecer">Formación académica</h3>
+          <div class="linea" style="margin-bottom: 44px">
+            <div class="hito aparecer">
+              <div class="tarjeta">
+                <span class="etiqueta">En curso</span>
+                <h3>Contabilidad General</h3>
+                <p class="lugar">
+                  Universidad Católica Boliviana San Pablo (UCB UAC)
+                </p>
+                <p style="color: var(--texto-suave)">
+                  Estudiante de cuarto semestre.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="subtitulo-linea aparecer">Experiencia y prácticas</h3>
+          <div class="linea">
+            <div class="hito aparecer">
+              <div class="tarjeta">
+                <span class="etiqueta">3 nov. 2025 – 23 dic. 2025</span>
+                <h3>Prácticas institucionales</h3>
+                <p class="lugar">Pastoral Social Cáritas Corocoro</p>
+                <ul>
+                  <li>Apoyo en gestión y seguimiento de proyectos</li>
+                  <li>Organización de documentación</li>
+                  <li>Trabajo administrativo básico</li>
+                  <li>Cuento con certificados</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= HABILIDADES ========================= -->
+      <section id="habilidades">
+        <div class="contenedor">
+          <div class="titulo-seccion aparecer">
+            <h2>Habilidades</h2>
+            <span></span>
+          </div>
+
+          <div class="habilidades-grid">
+            <div class="habilidad aparecer">
+              <div class="icono">📒</div>
+              <h3>Contabilidad básica</h3>
+              <p>Base sólida de mi carrera</p>
+            </div>
+            <div class="habilidad aparecer">
+              <div class="icono">📊</div>
+              <h3>Excel</h3>
+              <p>Nivel básico – intermedio</p>
+            </div>
+            <div class="habilidad aparecer">
+              <div class="icono">🏦</div>
+              <h3>Cajero bancario</h3>
+              <p>Atención y operaciones de caja</p>
+            </div>
+            <div class="habilidad aparecer">
+              <div class="icono">🗂️</div>
+              <h3>Caja y documentación</h3>
+              <p>Manejo de caja y orden de documentos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= SERVICIOS ========================= -->
+      <section id="servicios">
+        <div class="contenedor">
+          <div class="titulo-seccion aparecer">
+            <h2>Servicios</h2>
+            <span></span>
+          </div>
+
+          <div class="servicios-grid">
+            <article class="servicio aparecer">
+              <div class="icono">📁</div>
+              <h3>Apoyo administrativo</h3>
+              <p>
+                Trabajo administrativo básico y organización de documentación.
+              </p>
+            </article>
+            <article class="servicio aparecer">
+              <div class="icono">✅</div>
+              <h3>Seguimiento de proyectos</h3>
+              <p>
+                Apoyo en la gestión y seguimiento de proyectos institucionales.
+              </p>
+            </article>
+            <article class="servicio aparecer">
+              <div class="icono">💵</div>
+              <h3>Manejo de caja</h3>
+              <p>Atención de caja y manejo de documentación de respaldo.</p>
+            </article>
+            <article class="servicio aparecer">
+              <div class="icono">🧮</div>
+              <h3>Apoyo contable y en Excel</h3>
+              <p>Registros de contabilidad básica y planillas en Excel.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================= CONTACTO ========================= -->
+      <section id="contacto">
+        <div class="contenedor">
+          <div class="titulo-seccion aparecer">
+            <h2>Contacto</h2>
+            <span></span>
+          </div>
+
+          <div class="contacto-grid">
+            <div class="info-contacto aparecer">
+              <a
+                class="info-item"
+                href="mailto:callefloresdianalizeth@gmail.com"
+              >
+                <div class="icono">✉️</div>
+                <div>
+                  <small>Correo electrónico</small
+                  ><strong>callefloresdianalizeth@gmail.com</strong>
+                </div>
+              </a>
+              <a
+                class="info-item"
+                href="https://wa.me/59171372845"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="icono">📱</div>
+                <div>
+                  <small>Teléfono / WhatsApp</small
+                  ><strong>+591 71372845</strong>
+                </div>
+              </a>
+              <div class="info-item">
+                <div class="icono">📍</div>
+                <div>
+                  <small>Dirección</small
+                  ><strong>Av. Sucre, C. Franz Tamayo</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Formulario: validación y envío con JavaScript (ver abajo) -->
+            <form id="formContacto" class="aparecer" novalidate>
+              <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  placeholder="Tu nombre completo"
+                  autocomplete="name"
+                />
+                <p class="mensaje-error">
+                  Escribe tu nombre (mínimo 2 letras).
+                </p>
+              </div>
+
+              <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input
+                  type="email"
+                  id="correo"
+                  name="correo"
+                  placeholder="tucorreo@ejemplo.com"
+                  autocomplete="email"
+                />
+                <p class="mensaje-error">
+                  Escribe un correo válido, por ejemplo nombre@gmail.com.
+                </p>
+              </div>
+
+              <div class="campo">
+                <label for="mensaje">Mensaje</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  placeholder="Escribe aquí tu mensaje..."
+                ></textarea>
+                <p class="mensaje-error">
+                  El mensaje debe tener al menos 10 caracteres.
+                </p>
+              </div>
+
+              <!-- Campo trampa contra robots: debe quedar vacío -->
+              <input
+                type="text"
+                name="web"
+                class="trampa"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+
+              <button type="submit" class="btn btn-principal" id="botonEnviar">
+                Enviar mensaje
+              </button>
+              <p class="resultado" id="resultado" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="contenedor">
+        <p>
+          © <span id="anio"></span> Diana Calle · Estudiante de Contabilidad
+          General · UCB UAC
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      /* =====================================================
+       CONFIGURACIÓN IMPORTANTE
+       Aquí debes pegar la URL de tu Aplicación web de Google
+       Apps Script (la copias en el Paso 2 de la guía).
+       Debe verse así: https://script.google.com/macros/s/XXXXXXXX/exec
+       ===================================================== */
+      const URL_APPS_SCRIPT =
+        "https://script.google.com/macros/s/AKfycbzc09c10aVyfy8qywDJJQAVMh65U_9dkP6tlERMOOOJRojoNeA6znmEloW2TGywd4P5/exec";
+
+      /* =====================================================
+       1. MENÚ DE CELULAR (abrir y cerrar)
+       ===================================================== */
+      const botonMenu = document.getElementById("botonMenu");
+      const menu = document.getElementById("menu");
+
+      // Función para cerrar el menú
+      function cerrarMenu() {
+        menu.classList.remove("abierto");
+        botonMenu.classList.remove("abierto");
+        botonMenu.setAttribute("aria-expanded", "false");
+      }
+
+      // Al tocar la hamburguesa se abre o se cierra
+      botonMenu.addEventListener("click", () => {
+        const abierto = menu.classList.toggle("abierto");
+        botonMenu.classList.toggle("abierto", abierto);
+        botonMenu.setAttribute("aria-expanded", String(abierto));
+      });
+
+      // Al tocar cualquier enlace del menú, se cierra solo
+      menu
+        .querySelectorAll("a")
+        .forEach((enlace) => enlace.addEventListener("click", cerrarMenu));
+
+      // Si tocas fuera del menú, también se cierra
+      document.addEventListener("click", (e) => {
+        if (!menu.contains(e.target) && !botonMenu.contains(e.target))
+          cerrarMenu();
+      });
+
+      // Si agrandas la ventana (computadora), se reinicia el menú
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 860) cerrarMenu();
+      });
+
+      /* =====================================================
+       2. SOMBRA DEL MENÚ Y ENLACE ACTIVO AL BAJAR
+       ===================================================== */
+      const encabezado = document.getElementById("encabezado");
+      const secciones = document.querySelectorAll("main section");
+      const enlacesMenu = document.querySelectorAll("nav a");
+
+      function alHacerScroll() {
+        // Sombra cuando ya bajaste un poco
+        encabezado.classList.toggle("con-sombra", window.scrollY > 10);
+
+        // Marca en verde la sección donde estás
+        let actual = "inicio";
+        secciones.forEach((sec) => {
+          if (window.scrollY >= sec.offsetTop - 120) actual = sec.id;
+        });
+        enlacesMenu.forEach((a) => {
+          a.classList.toggle("activo", a.getAttribute("href") === "#" + actual);
+        });
+      }
+      window.addEventListener("scroll", alHacerScroll, { passive: true });
+      alHacerScroll();
+
+      /* =====================================================
+       3. ANIMACIONES SUAVES AL BAJAR
+       Los elementos con la clase "aparecer" se muestran
+       poco a poco cuando entran en la pantalla.
+       ===================================================== */
+      const elementos = document.querySelectorAll(".aparecer");
+
+      if ("IntersectionObserver" in window) {
+        const observador = new IntersectionObserver(
+          (entradas) => {
+            entradas.forEach((entrada) => {
+              if (entrada.isIntersecting) {
+                entrada.target.classList.add("visible");
+                observador.unobserve(entrada.target); // solo se anima una vez
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+
+        elementos.forEach((el) => observador.observe(el));
+      } else {
+        // Navegadores muy antiguos: se muestra todo sin animación
+        elementos.forEach((el) => el.classList.add("visible"));
+      }
+
+      /* =====================================================
+       4. AÑO AUTOMÁTICO EN EL PIE DE PÁGINA
+       ===================================================== */
+      document.getElementById("anio").textContent = new Date().getFullYear();
+
+      /* =====================================================
+       5. FORMULARIO: VALIDACIÓN Y ENVÍO A GOOGLE SHEETS
+       ===================================================== */
+      const formulario = document.getElementById("formContacto");
+      const botonEnviar = document.getElementById("botonEnviar");
+      const resultado = document.getElementById("resultado");
+
+      // Marca un campo como correcto o con error
+      function marcarCampo(input, esValido) {
+        input.closest(".campo").classList.toggle("error", !esValido);
+        return esValido;
+      }
+
+      // Reglas de validación de cada campo
+      function validarNombre() {
+        const campo = formulario.nombre;
+        return marcarCampo(campo, campo.value.trim().length >= 2);
+      }
+      function validarCorreo() {
+        const campo = formulario.correo;
+        const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        return marcarCampo(campo, formatoCorreo.test(campo.value.trim()));
+      }
+      function validarMensaje() {
+        const campo = formulario.mensaje;
+        return marcarCampo(campo, campo.value.trim().length >= 10);
+      }
+
+      // Revisa cada campo apenas la persona sale de él
+      formulario.nombre.addEventListener("blur", validarNombre);
+      formulario.correo.addEventListener("blur", validarCorreo);
+      formulario.mensaje.addEventListener("blur", validarMensaje);
+
+      // Muestra un mensaje de éxito o de error debajo del botón
+      function mostrarResultado(texto, tipo) {
+        resultado.textContent = texto;
+        resultado.className = "resultado " + tipo; // "ok" o "fallo"
+      }
+
+      // Al presionar "Enviar mensaje"
+      formulario.addEventListener("submit", async (evento) => {
+        evento.preventDefault(); // evita que la página se recargue
+        resultado.className = "resultado";
+
+        // Se validan los tres campos (sin cortar la revisión en el primer error)
+        const todoBien = [
+          validarNombre(),
+          validarCorreo(),
+          validarMensaje(),
+        ].every(Boolean);
+        if (!todoBien) return;
+
+        // Si un robot llenó el campo trampa, se ignora el envío
+        if (formulario.web.value !== "") return;
+
+        // Si todavía no pegaste la URL de Apps Script, avisa
+        if (URL_APPS_SCRIPT.startsWith("PEGA_AQUI")) {
+          mostrarResultado(
+            "Falta configurar la URL de Google Apps Script en el archivo index.html.",
+            "fallo",
+          );
+          return;
+        }
+
+        // Se desactiva el botón mientras se envía
+        botonEnviar.disabled = true;
+        botonEnviar.textContent = "Enviando...";
+
+        try {
+          // Datos que recibirá la función doPost de Apps Script
+          const datos = new URLSearchParams({
+            nombre: formulario.nombre.value.trim(),
+            correo: formulario.correo.value.trim(),
+            mensaje: formulario.mensaje.value.trim(),
+          });
+
+          // "no-cors" es necesario para enviar a Apps Script desde otra página.
+          // Por eso no podemos leer la respuesta: si no hubo error de red, se envió.
+          await fetch(URL_APPS_SCRIPT, {
+            method: "POST",
+            mode: "no-cors",
+            body: datos,
+          });
+
+          mostrarResultado("¡Mensaje enviado!", "ok");
+          formulario.reset();
+        } catch (error) {
+          mostrarResultado(
+            "No se pudo enviar. Revisa tu internet e inténtalo otra vez.",
+            "fallo",
+          );
+        } finally {
+          botonEnviar.disabled = false;
+          botonEnviar.textContent = "Enviar mensaje";
+        }
+      });
+    </script>
+  </body>
+</html>
